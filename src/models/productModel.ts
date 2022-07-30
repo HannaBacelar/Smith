@@ -18,6 +18,12 @@ export default class ProductModel {
     const { insertId } = dataInserted;
     return { id: insertId, ...product };
   }
+
+  public async getAllProducts(): Promise<Product[]> {
+    const productsResult = await this.connection.execute('SELECT * FROM Trybesmith.Products');
+    const [rows] = productsResult;
+    return rows as Product[];
+  }
 } 
 
 // <ResultSetHeader> é um dos tipos dos quais ajuda a forncer o insert id
